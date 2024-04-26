@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public interface Controller {
-    private ArrayList<Observer> observers = new ArrayList<>();
-
+	/*
+	private ArrayList<Observer> observers = new ArrayList<>();
 
     public void register(Observer obs){
         observers.add(obs);
@@ -16,5 +16,6 @@ public interface Controller {
         for(Observer obs:observers)
         obs.update();
     }
+    */
 
 }
