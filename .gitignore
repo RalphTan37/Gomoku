@@ -6,3 +6,5 @@
 /Observer.class
 /Stone.class
 /Timer.class
+/GomokuBoard$ButtonClickListener.class
+/GomokuDriver.class
