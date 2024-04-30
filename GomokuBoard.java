@@ -21,7 +21,10 @@ public class GomokuBoard extends JFrame {
 	private char[][] board;
 	private JPanel boardPanel;
 	private JLabel welcomeLabel;
-	private JPanel topSpacePanel;
+	private JPanel spacePanel1;
+	private JPanel spacePanel2;
+	private JPanel spacePanel3;
+	private JPanel spacePanel4;
 	
 	public void GomokuGUI() {
 		this.size = DEFAULT_SIZE;
@@ -39,17 +42,31 @@ public class GomokuBoard extends JFrame {
 		}
 	}
 	
+	//Gomoku GUI
 	private void setupGomokuGUI() {
 		setTitle("GOMOKU");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		topSpacePanel = new JPanel();
-	    topSpacePanel.setPreferredSize(new Dimension(400, 50)); 
-	    add(topSpacePanel, BorderLayout.NORTH);
+		spacePanel1 = new JPanel();
+	    spacePanel1.setPreferredSize(new Dimension(400, 100)); 
+	    add(spacePanel1, BorderLayout.NORTH);
+	    
+	    spacePanel2 = new JPanel();
+	    spacePanel2.setPreferredSize(new Dimension(50, 400));
+	    add(spacePanel2, BorderLayout.EAST);
+	    
+	    spacePanel3 = new JPanel();
+	    spacePanel3.setPreferredSize(new Dimension(50, 400));
+	    add(spacePanel3, BorderLayout.WEST);
+	    
+	    spacePanel4 = new JPanel();
+	    spacePanel4.setPreferredSize(new Dimension (400,50));
+	    add(spacePanel4, BorderLayout.SOUTH);
 	     
 	    //Welcome Label
 		welcomeLabel = new JLabel("Welcome to Gomoku");
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLabel.setFont(new Font("Serif", Font.BOLD, 30));
 		add(welcomeLabel, BorderLayout.NORTH);
 		
 		//Gomoku Board
