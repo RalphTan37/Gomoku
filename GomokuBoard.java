@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class GomokuBoard extends JFrame {
 	//Instance Variables
@@ -38,16 +39,20 @@ public class GomokuBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         
+        //Creates a Label the welcomes the user
         JLabel welcomeLabel = new JLabel("Welcome to Gomoku", SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        welcomeLabel.setFont(new Font("Serif", Font.BOLD, 35));
         add(welcomeLabel, BorderLayout.NORTH);
         
+        //Creates boardPanel with GridLayout
         boardPanel = new JPanel(new GridLayout(size, size));
         buttons = new JButton[size][size];
-        
+
+        //Creates and Places Buttons
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 buttons[row][col] = new GomokuButton(row, col, board, buttons);
+                buttons[row][col].setBackground(new Color(238, 238, 210));
                 boardPanel.add(buttons[row][col]);
             }
         }
