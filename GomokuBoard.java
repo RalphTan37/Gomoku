@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,12 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class GomokuBoard extends JFrame {
+	//Instance Variables
     private static final int DEFAULT_SIZE = 15;
     private int size;
     private JButton[][] buttons;
     private char[][] board;
     private JPanel boardPanel;
 
+    //Gomoku Constructor
     public GomokuBoard() {
         this.size = DEFAULT_SIZE;
         this.board = new char[size][size];
@@ -22,6 +23,7 @@ public class GomokuBoard extends JFrame {
         setupGomokuGUI();
     }
 
+    //Initializes Gomoku Game Board
     private void initializeBoard() {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
@@ -30,6 +32,7 @@ public class GomokuBoard extends JFrame {
         }
     }
 
+    //Create GUI for Gomoku Game
     private void setupGomokuGUI() {
         setTitle("GOMOKU");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
