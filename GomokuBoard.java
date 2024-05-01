@@ -57,8 +57,10 @@ public class GomokuBoard extends JFrame {
             }
         }
         
+        //Positions Gomoku Board in the center of JFrame
         add(boardPanel, BorderLayout.CENTER);
         
+        //Methods Settings up the Window
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
