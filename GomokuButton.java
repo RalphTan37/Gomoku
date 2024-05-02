@@ -10,6 +10,7 @@ public class GomokuButton extends JButton implements ActionListener {
     private int col;
     private char[][] board;
     private JButton[][] buttons;
+    private static boolean isXPlayer = true;
 
     public GomokuButton(int row, int col, char[][] board, JButton[][] buttons) {
         this.row = row;
@@ -23,45 +24,39 @@ public class GomokuButton extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (board[row][col] == '-') {
-            board[row][col] = 'O';  
-            this.setText("O");
-            if (checkFiveInARow()) {
-                JOptionPane.showMessageDialog(null, "Congrats, Player 1 won!");
-                
+            if (isXPlayer) {
+                board[row][col] = 'X';
+                this.setText("X");
+            } else {
+                board[row][col] = 'O';
+                this.setText("O");
+            }
+            isXPlayer = !isXPlayer; // Toggle the player turn
+
+            if (checkFiveInARow(board[row][col])) {
+                JOptionPane.showMessageDialog(null, "Congrats, Player " + (board[row][col] == 'X' ? "1" : "2") + " won!");
             }
         }
     }
 
-    private boolean checkFiveInARow() {
-        return checkDirection(1, 0) ||  
-               checkDirection(0, 1) ||  
-               checkDirection(1, 1) ||  
-               checkDirection(1, -1);   
+    private boolean checkFiveInARow(char player) {
+        // Check all four directions: horizontal, vertical, and two diagonals
+        return checkDirection(row, col, 1, 0, player) >= 4 ||  // horizontal
+               checkDirection(row, col, 0, 1, player) >= 4 ||  // vertical
+               checkDirection(row, col, 1, 1, player) >= 4 ||  // diagonal (down-right)
+               checkDirection(row, col, 1, -1, player) >= 4;  // diagonal (up-right)
     }
 
-    private boolean checkDirection(int rowStep, int colStep) {
-        int count = 1;  
-        int r = row + rowStep;
-        int c = col + colStep;
-
-        
-        while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == 'O') {
+    private int checkDirection(int startRow, int startCol, int rowStep, int colStep, char player) {
+        int count = 0;
+        // Check in the positive direction
+        for (int r = startRow, c = startCol; r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == player; r += rowStep, c += colStep) {
             count++;
-            if (count == 5) return true;
-            r += rowStep;
-            c += colStep;
         }
-
-        
-        r = row - rowStep;
-        c = col - colStep;
-        while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == 'O') {
+        // Check in the negative direction
+        for (int r = startRow - rowStep, c = startCol - colStep; r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == player; r -= rowStep, c -= colStep) {
             count++;
-            if (count == 5) return true;
-            r -= rowStep;
-            c -= colStep;
         }
-
-        return false;
+        return count - 1;  // Subtract one because we counted the start position twice
     }
 }
