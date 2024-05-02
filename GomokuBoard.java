@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GomokuBoard extends JFrame {
     private static final int DEFAULT_SIZE = 15;
@@ -34,6 +36,21 @@ public class GomokuBoard extends JFrame {
         
         boardPanel = new JPanel(new GridLayout(size, size));
         buttons = new JButton[size][size];
+        
+        JButton resetButton = new JButton("Reset board");
+        add(resetButton, BorderLayout.SOUTH);
+        resetButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                initializeBoard();
+                for (int row = 0; row < size; row++) {
+                    for (int col = 0; col < size; col++) {
+                        buttons[row][col].setText(" ");
+                    }
+                }
+                boardPanel.revalidate();
+                boardPanel.repaint();
+            }
+        });
         
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
