@@ -10,14 +10,15 @@ public class GomokuButton extends JButton implements ActionListener {
     private int col;
     private char[][] board;
     private JButton[][] buttons;
-    private char currentPlayer = 'O';
+    private GomokuPlayer currentPlayer;
 
     //Gomoku Button Constructor
-    public GomokuButton(int row, int col, char[][] board, JButton[][] buttons) {
+    public GomokuButton(int row, int col, char[][] board, JButton[][] buttons, GomokuPlayer currentPlayer) {
         this.row = row;
         this.col = col;
         this.board = board;
         this.buttons = buttons;
+        this.currentPlayer = currentPlayer;
         this.setPreferredSize(new Dimension(50, 50));
         this.addActionListener(this);
     }
@@ -26,18 +27,13 @@ public class GomokuButton extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (board[row][col] == '-') {
-            board[row][col] = currentPlayer;  
-            this.setText(String.valueOf(currentPlayer));
+            board[row][col] = currentPlayer.getCurrentPlayer();  
+            this.setText(String.valueOf(currentPlayer.getCurrentPlayer()));
             if (checkFiveInARow()) {
                 JOptionPane.showMessageDialog(null, "Congrats, Player 1 won!");
             }
-            switchPlayer();
+            currentPlayer.switchPlayer();
         }
-    }
-    
-    //Method to Switch Players
-    private void switchPlayer() {
-    	currentPlayer = (currentPlayer == 'O') ? 'X' : 'O';
     }
 
     //Checks the Winning Condition - Five in a Row!

@@ -19,12 +19,14 @@ public class GomokuBoard extends JFrame {
     private JPanel bottomSpacePanel;
     private JPanel leftSpacePanel;
     private JPanel rightSpacePanel;
+    private GomokuPlayer currentPlayer;
     
     //Gomoku Constructor
     public GomokuBoard() {
         this.size = DEFAULT_SIZE;
         this.board = new char[size][size];
         initializeBoard();
+        currentPlayer = new GomokuPlayer();
         setupGomokuGUI();
     }
 
@@ -70,7 +72,7 @@ public class GomokuBoard extends JFrame {
         //Creates and Places Buttons
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                buttons[row][col] = new GomokuButton(row, col, board, buttons);
+                buttons[row][col] = new GomokuButton(row, col, board, buttons, currentPlayer);
                 buttons[row][col].setBackground(new Color(238, 238, 210));
                 boardPanel.add(buttons[row][col]);
             }
