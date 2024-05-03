@@ -4,10 +4,13 @@ public class GomokuGame {
 	//Creates player 1 and 2 objects
     private GomokuPlayer player1 = new GomokuPlayer();
     private GomokuPlayer player2 = new GomokuPlayer();
+    private GomokuBoard boardFrame;
     
     //Constructor
-    public GomokuGame() {
+    public GomokuGame(GomokuBoard boardFrame) {
     	currentPlayer = player1; //Starting w/ player1
+    	this.boardFrame = boardFrame;
+    	boardFrame.updateCurrentPlayerLabel(getCurrentPlayerName(), currentPlayer.getCurrentPlayer());
     }
     
     //Handles players' turns and checks if the game is over
@@ -31,6 +34,9 @@ public class GomokuGame {
     //Switches current player 
     private void switchPlayers() {
     	currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    	String playerName = (currentPlayer == player1) ? "Player 1" : "Player 2";
+    	char playerSymbol = currentPlayer.getCurrentPlayer();
+    	boardFrame.updateCurrentPlayerLabel(playerName, playerSymbol);
     }
     
     //Get current player's name
