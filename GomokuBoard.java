@@ -79,7 +79,6 @@ public class GomokuBoard extends JFrame {
         //Positions Gomoku Board in the center of JFrame
         add(boardPanel, BorderLayout.CENTER);
         
-        
         //Window is set to maximum (fullscreen)
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         

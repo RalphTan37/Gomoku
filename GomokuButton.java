@@ -5,11 +5,14 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class GomokuButton extends JButton implements ActionListener {
-    private int row;
+    //Instance Variables
+	private int row;
     private int col;
     private char[][] board;
     private JButton[][] buttons;
+    private char currentPlayer = 'O';
 
+    //Gomoku Button Constructor
     public GomokuButton(int row, int col, char[][] board, JButton[][] buttons) {
         this.row = row;
         this.col = col;
@@ -19,18 +22,25 @@ public class GomokuButton extends JButton implements ActionListener {
         this.addActionListener(this);
     }
 
+    //Event Handler for Button Clicks
     @Override
     public void actionPerformed(ActionEvent e) {
         if (board[row][col] == '-') {
-            board[row][col] = 'O';  
-            this.setText("O");
+            board[row][col] = currentPlayer;  
+            this.setText(String.valueOf(currentPlayer));
             if (checkFiveInARow()) {
                 JOptionPane.showMessageDialog(null, "Congrats, Player 1 won!");
-                
             }
+            switchPlayer();
         }
     }
+    
+    //Method to Switch Players
+    private void switchPlayer() {
+    	currentPlayer = (currentPlayer == 'O') ? 'X' : 'O';
+    }
 
+    //Checks the Winning Condition - Five in a Row!
     private boolean checkFiveInARow() {
         return checkDirection(1, 0) ||  
                checkDirection(0, 1) ||  
@@ -38,6 +48,7 @@ public class GomokuButton extends JButton implements ActionListener {
                checkDirection(1, -1);   
     }
 
+    //Checks for 5 consecutive stones in a row & direction
     private boolean checkDirection(int rowStep, int colStep) {
         int count = 1;  
         int r = row + rowStep;
