@@ -21,7 +21,7 @@ public class GomokuBoard extends JFrame {
     private JPanel rightSpacePanel;
     private GomokuPlayer currentPlayer;
     private JLabel currentPlayerLabel;
-    
+
     //Gomoku Constructor
     public GomokuBoard() {
         this.size = DEFAULT_SIZE;
@@ -67,11 +67,24 @@ public class GomokuBoard extends JFrame {
         currentPlayerLabel = new JLabel("Current Turn: Player 1 (O)", SwingConstants.CENTER);
         currentPlayerLabel.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
+        //Creates reset button
+        JButton resetButton = new JButton("Reset Board");
+        resetButton.addActionListener(e ->{
+        	initializeBoard(); //clears board
+        	currentPlayerLabel.setText("Current Turn: Player 1 (O)");
+        	for (int row = 0; row < size; row++) {
+        		for (int col = 0; col < size; col++) {
+        			buttons[row][col].setText(" ");
+        		}
+        	}
+        });
+        
         //Bottom Space Panel 
         bottomSpacePanel = new JPanel();
         bottomSpacePanel.setPreferredSize(new Dimension(400, 50));
+        bottomSpacePanel.add(resetButton);
         add(bottomSpacePanel, BorderLayout.SOUTH);
-        
+
         //Left Space Panel
         leftSpacePanel = new JPanel();
         leftSpacePanel.setPreferredSize(new Dimension(50, 400));

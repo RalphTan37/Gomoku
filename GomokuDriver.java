@@ -1,4 +1,4 @@
-//Starts the Gomoku Game
+//Starting the Gomoku Game
 public class GomokuDriver {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
