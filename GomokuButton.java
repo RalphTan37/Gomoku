@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 public class GomokuButton extends JButton implements ActionListener {
     //Instance Variables
@@ -27,31 +28,39 @@ public class GomokuButton extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (board[row][col] == '-') {
-            board[row][col] = currentPlayer.getCurrentPlayer();  
-            this.setText(String.valueOf(currentPlayer.getCurrentPlayer()));
-            if (checkFiveInARow()) {
-                JOptionPane.showMessageDialog(null, "Congrats, Player 1 won!");
+        	char stone = currentPlayer.getCurrentPlayer();
+            board[row][col] = stone;
+            this.setText(String.valueOf(stone));
+            if (checkFiveInARow(stone)) {
+                String playerName = (stone == 'O') ? "Player 1" : "Player 2";
+            	JOptionPane.showMessageDialog(null, "Congrats, " + playerName + " won!");
+            	//In 2 seconds, the program closes
+            	Timer timer = new Timer(2000, (event) ->{
+            		System.exit(0);
+            	});
+            	timer.setRepeats(false);
+            	timer.start();
             }
             currentPlayer.switchPlayer();
         }
     }
 
     //Checks the Winning Condition - Five in a Row!
-    private boolean checkFiveInARow() {
-        return checkDirection(1, 0) ||  
-               checkDirection(0, 1) ||  
-               checkDirection(1, 1) ||  
-               checkDirection(1, -1);   
+    private boolean checkFiveInARow(char stone) {
+        return checkDirection(1, 0, stone) ||  
+               checkDirection(0, 1, stone) ||  
+               checkDirection(1, 1, stone) ||  
+               checkDirection(1, -1, stone);   
     }
 
     //Checks for 5 consecutive stones in a row & direction
-    private boolean checkDirection(int rowStep, int colStep) {
+    private boolean checkDirection(int rowStep, int colStep, char stone) {
         int count = 1;  
         int r = row + rowStep;
         int c = col + colStep;
 
         
-        while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == 'O') {
+        while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == stone) {
             count++;
             if (count == 5) return true;
             r += rowStep;
@@ -61,7 +70,7 @@ public class GomokuButton extends JButton implements ActionListener {
         
         r = row - rowStep;
         c = col - colStep;
-        while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == 'O') {
+        while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == stone) {
             count++;
             if (count == 5) return true;
             r -= rowStep;
