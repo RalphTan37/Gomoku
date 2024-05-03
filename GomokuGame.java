@@ -1,7 +1,14 @@
 public class GomokuGame {
+	//Current player tracker
+	private GomokuPlayer currentPlayer;
 	//Creates player 1 and 2 objects
     private GomokuPlayer player1 = new GomokuPlayer();
     private GomokuPlayer player2 = new GomokuPlayer();
+    
+    //Constructor
+    public GomokuGame() {
+    	currentPlayer = player1; //Starting w/ player1
+    }
     
     //Handles players' turns and checks if the game is over
     public void startGame() {
@@ -18,12 +25,16 @@ public class GomokuGame {
     
     //Returns stone for current player
     private char getCurrentPlayerSymbol() {
-    	return (player1.getCurrentPlayer() == 'O') ? 'O' : 'X';
+    	return currentPlayer.getCurrentPlayer();
     }
     
-    //Switches current player from player1 or player2
+    //Switches current player 
     private void switchPlayers() {
-    	player1.switchPlayer();
-    	player2.switchPlayer();
+    	currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    }
+    
+    //Get current player's name
+    public String getCurrentPlayerName() {
+    	return (currentPlayer == player1) ? "Player 1" : "Player 2";
     }
 }
