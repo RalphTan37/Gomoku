@@ -55,11 +55,12 @@ public class GomokuButton extends JButton implements ActionListener {
 
     //Checks for 5 consecutive stones in a row & direction
     private boolean checkDirection(int rowStep, int colStep, char stone) {
-        int count = 1;  
+        //Variables
+    	int count = 1;  
         int r = row + rowStep;
         int c = col + colStep;
 
-        
+        //Traverses through board array
         while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == stone) {
             count++;
             if (count == 5) return true;
@@ -67,7 +68,7 @@ public class GomokuButton extends JButton implements ActionListener {
             c += colStep;
         }
 
-        
+        //Traverses in the opposite direction of rowStep & colStep
         r = row - rowStep;
         c = col - colStep;
         while (r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == stone) {
@@ -76,7 +77,6 @@ public class GomokuButton extends JButton implements ActionListener {
             r -= rowStep;
             c -= colStep;
         }
-
         return false;
     }
 }

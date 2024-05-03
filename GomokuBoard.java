@@ -61,8 +61,8 @@ public class GomokuBoard extends JFrame {
         add(rightSpacePanel, BorderLayout.EAST);
         
         //Creates a Label the welcomes the user
-        JLabel welcomeLabel = new JLabel("Welcome to Gomoku", SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        JLabel welcomeLabel = new JLabel("Welcome To Gomoku", SwingConstants.CENTER);
+        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 30));
         add(welcomeLabel, BorderLayout.NORTH);
         
         //Creates boardPanel with GridLayout

@@ -14,7 +14,7 @@ public class GomokuGame {
     }
     
     private char getCurrentPlayerSymbol() {
-    	return (player1.getCurrentPlayer() == 'O') ? '1' : '2';
+    	return (player1.getCurrentPlayer() == 'O') ? 'O' : 'X';
     }
     
     private void switchPlayers() {
