@@ -11,16 +11,16 @@ public class GomokuButton extends JButton implements ActionListener {
     private char[][] board;
     private JButton[][] buttons;
     private GomokuPlayer currentPlayer;
-    private GomokuBoard gameBoard;  // Reference to the board to update labels
+    private GomokuBoard gameBoard;  
 
-    // Update constructor to include gameBoard
+
     public GomokuButton(int row, int col, char[][] board, JButton[][] buttons, GomokuPlayer currentPlayer, GomokuBoard gameBoard) {
         this.row = row;
         this.col = col;
         this.board = board;
         this.buttons = buttons;
         this.currentPlayer = currentPlayer;
-        this.gameBoard = gameBoard; // Save the reference
+        this.gameBoard = gameBoard; 
         this.setPreferredSize(new Dimension(50, 50));
         this.addActionListener(this);
     }
@@ -40,13 +40,13 @@ public class GomokuButton extends JButton implements ActionListener {
                 timer.setRepeats(false);
                 timer.start();
             } else {
-                currentPlayer.switchPlayer();  // Switch player first
-                gameBoard.updateCurrentPlayerLabel();  // Update label on game board
+                currentPlayer.switchPlayer();  
+                gameBoard.updateCurrentPlayerLabel();  
             }
         }
     }
 
-    //Checks the Winning Condition - Five in a Row!
+    
     private boolean checkFiveInARow(char stone) {
         return checkDirection(1, 0, stone) ||  
                checkDirection(0, 1, stone) ||  
@@ -54,9 +54,9 @@ public class GomokuButton extends JButton implements ActionListener {
                checkDirection(1, -1, stone);   
     }
 
-    //Checks for 5 consecutive stones in a row & direction
+    
     private boolean checkDirection(int rowStep, int colStep, char stone) {
-        //Variables
+     
     	int count = 1;  
         int r = row + rowStep;
         int c = col + colStep;
