@@ -33,15 +33,9 @@ public class GomokuBoard extends JFrame {
     
     //Update current player label
     public void updateCurrentPlayerLabel() {
-<<<<<<< HEAD
     	String playerName = (currentPlayer.getCurrentPlayer() == 'O') ? "Player 1" : "Player 2";
     	char playerSymbol = currentPlayer.getCurrentPlayer();
     	currentPlayerLabel.setText("Current Turn: " + playerName + " (" + playerSymbol + ")");
-=======
-        String playerName = (currentPlayer.getCurrentPlayer() == 'O') ? "Player 1" : "Player 2";
-        char playerSymbol = currentPlayer.getCurrentPlayer();
-        currentPlayerLabel.setText("Current Turn: " + playerName + " (" + playerSymbol + ")");
->>>>>>> 21dd64b4d41a7e90ddf2ee978475997ffe67137e
     }
 
     //Initializes Gomoku Game Board
@@ -78,7 +72,7 @@ public class GomokuBoard extends JFrame {
         //Creates reset button
         JButton resetButton = new JButton("Reset Board");
         resetButton.addActionListener(e ->{
-        	initializeBoard(); 
+        	initializeBoard(); //clears board
         	currentPlayerLabel.setText("Current Turn: Player 1 (O)");
         	for (int row = 0; row < size; row++) {
         		for (int col = 0; col < size; col++) {
@@ -86,26 +80,28 @@ public class GomokuBoard extends JFrame {
         		}
         	}
         });
-       
+        
+        //Bottom Space Panel 
         bottomSpacePanel = new JPanel();
         bottomSpacePanel.setPreferredSize(new Dimension(400, 50));
         bottomSpacePanel.add(resetButton);
         add(bottomSpacePanel, BorderLayout.SOUTH);
 
-       
+        //Left Space Panel
         leftSpacePanel = new JPanel();
         leftSpacePanel.setPreferredSize(new Dimension(50, 400));
         add(leftSpacePanel, BorderLayout.WEST);
 
-        
+        //Right Space Panel
         rightSpacePanel = new JPanel();
         rightSpacePanel.setPreferredSize(new Dimension(50, 400));
         add(rightSpacePanel, BorderLayout.EAST);
 
-        
+        //Creates boardPanel with GridLayout
         boardPanel = new JPanel(new GridLayout(size, size));
         buttons = new JButton[size][size];
         
+        //Creates and Places Buttons
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 buttons[row][col] = new GomokuButton(row, col, board, buttons, currentPlayer, this);
@@ -114,13 +110,13 @@ public class GomokuBoard extends JFrame {
             }
         }
         
-
+        //Positions Gomoku Board in the center of JFrame
         add(boardPanel, BorderLayout.CENTER);
         
-
+        //Adds current player label to welcome panel
         welcomePanel.add(currentPlayerLabel, BorderLayout.SOUTH);
         
-       
+        //Methods Settings up the Window
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
