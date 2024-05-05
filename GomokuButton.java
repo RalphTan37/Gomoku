@@ -6,42 +6,43 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class GomokuButton extends JButton implements ActionListener {
-    //Instance Variables
-	private int row;
+    private int row;
     private int col;
     private char[][] board;
     private JButton[][] buttons;
     private GomokuPlayer currentPlayer;
+    private GomokuBoard gameBoard;  // Reference to the board to update labels
 
-    //Gomoku Button Constructor
-    public GomokuButton(int row, int col, char[][] board, JButton[][] buttons, GomokuPlayer currentPlayer) {
+    // Update constructor to include gameBoard
+    public GomokuButton(int row, int col, char[][] board, JButton[][] buttons, GomokuPlayer currentPlayer, GomokuBoard gameBoard) {
         this.row = row;
         this.col = col;
         this.board = board;
         this.buttons = buttons;
         this.currentPlayer = currentPlayer;
+        this.gameBoard = gameBoard; // Save the reference
         this.setPreferredSize(new Dimension(50, 50));
         this.addActionListener(this);
     }
 
-    //Event Handler for Button Clicks
     @Override
     public void actionPerformed(ActionEvent e) {
         if (board[row][col] == '-') {
-        	char stone = currentPlayer.getCurrentPlayer();
+            char stone = currentPlayer.getCurrentPlayer();
             board[row][col] = stone;
             this.setText(String.valueOf(stone));
             if (checkFiveInARow(stone)) {
                 String playerName = (stone == 'O') ? "Player 1" : "Player 2";
-            	JOptionPane.showMessageDialog(null, "Congrats, " + playerName + " won!");
-            	//In 2 seconds, the program closes
-            	Timer timer = new Timer(2000, (event) ->{
-            		System.exit(0);
-            	});
-            	timer.setRepeats(false);
-            	timer.start();
+                JOptionPane.showMessageDialog(null, "Congrats, " + playerName + " won!");
+                Timer timer = new Timer(2000, (event) -> {
+                    System.exit(0);
+                });
+                timer.setRepeats(false);
+                timer.start();
+            } else {
+                currentPlayer.switchPlayer();  // Switch player first
+                gameBoard.updateCurrentPlayerLabel();  // Update label on game board
             }
-            currentPlayer.switchPlayer();
         }
     }
 

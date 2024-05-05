@@ -32,8 +32,10 @@ public class GomokuBoard extends JFrame {
     }
     
     //Update current player label
-    public void updateCurrentPlayerLabel(String playerName, char playerSymbol) {
-    	currentPlayerLabel.setText("Current Turn: " + playerName + " (" + playerSymbol + ")");
+    public void updateCurrentPlayerLabel() {
+        String playerName = (currentPlayer.getCurrentPlayer() == 'O') ? "Player 1" : "Player 2";
+        char playerSymbol = currentPlayer.getCurrentPlayer();
+        currentPlayerLabel.setText("Current Turn: " + playerName + " (" + playerSymbol + ")");
     }
 
     //Initializes Gomoku Game Board
@@ -102,7 +104,7 @@ public class GomokuBoard extends JFrame {
         //Creates and Places Buttons
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
-                buttons[row][col] = new GomokuButton(row, col, board, buttons, currentPlayer);
+                buttons[row][col] = new GomokuButton(row, col, board, buttons, currentPlayer, this);
                 buttons[row][col].setBackground(new Color(238, 238, 210));
                 boardPanel.add(buttons[row][col]);
             }
