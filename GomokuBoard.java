@@ -80,26 +80,27 @@ public class GomokuBoard extends JFrame {
         		}
         	}
         });
-       
+        //Bottom space panel
         bottomSpacePanel = new JPanel();
         bottomSpacePanel.setPreferredSize(new Dimension(400, 50));
         bottomSpacePanel.add(resetButton);
         add(bottomSpacePanel, BorderLayout.SOUTH);
 
-       
+        //Left space panel
         leftSpacePanel = new JPanel();
         leftSpacePanel.setPreferredSize(new Dimension(50, 400));
         add(leftSpacePanel, BorderLayout.WEST);
 
-        
+        //Right space panel
         rightSpacePanel = new JPanel();
         rightSpacePanel.setPreferredSize(new Dimension(50, 400));
         add(rightSpacePanel, BorderLayout.EAST);
 
-        
+        //Create boardPanel with GridLayout
         boardPanel = new JPanel(new GridLayout(size, size));
         buttons = new JButton[size][size];
         
+        //Creates and Places Buttons
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 buttons[row][col] = new GomokuButton(row, col, board, buttons, currentPlayer, this);
@@ -108,10 +109,10 @@ public class GomokuBoard extends JFrame {
             }
         }
         
-
+        //Positions Gomoku Board in the center
         add(boardPanel, BorderLayout.CENTER);
         
-
+        //Adds current player label to welcome panel
         welcomePanel.add(currentPlayerLabel, BorderLayout.SOUTH);
         
        
