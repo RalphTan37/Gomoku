@@ -33,9 +33,15 @@ public class GomokuBoard extends JFrame {
     
     //Update current player label
     public void updateCurrentPlayerLabel() {
+<<<<<<< HEAD
+    	String playerName = (currentPlayer.getCurrentPlayer() == 'O') ? "Player 1" : "Player 2";
+    	char playerSymbol = currentPlayer.getCurrentPlayer();
+    	currentPlayerLabel.setText("Current Turn: " + playerName + " (" + playerSymbol + ")");
+=======
         String playerName = (currentPlayer.getCurrentPlayer() == 'O') ? "Player 1" : "Player 2";
         char playerSymbol = currentPlayer.getCurrentPlayer();
         currentPlayerLabel.setText("Current Turn: " + playerName + " (" + playerSymbol + ")");
+>>>>>>> 21dd64b4d41a7e90ddf2ee978475997ffe67137e
     }
 
     //Initializes Gomoku Game Board
@@ -53,7 +59,7 @@ public class GomokuBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         
-        //Creates a Label the welcomes the user
+        //Creates a label that welcomes the user
         JLabel welcomeLabel = new JLabel("Welcome To Gomoku", SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 30));
 

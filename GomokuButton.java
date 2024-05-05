@@ -11,8 +11,9 @@ public class GomokuButton extends JButton implements ActionListener {
     private char[][] board;
     private JButton[][] buttons;
     private GomokuPlayer currentPlayer;
+    private GomokuBoard gameBoard;
+    //Gomoku Button Constructor
     private GomokuBoard gameBoard;  
-
     //Update constructor to include gameboard
     public GomokuButton(int row, int col, char[][] board, JButton[][] buttons, GomokuPlayer currentPlayer, GomokuBoard gameBoard) {
         this.row = row;
@@ -20,7 +21,11 @@ public class GomokuButton extends JButton implements ActionListener {
         this.board = board;
         this.buttons = buttons;
         this.currentPlayer = currentPlayer;
+
+        this.gameBoard = gameBoard;
+
         this.gameBoard = gameBoard; 
+
         this.setPreferredSize(new Dimension(50, 50));
         this.addActionListener(this);
     }
@@ -43,6 +48,8 @@ public class GomokuButton extends JButton implements ActionListener {
                 currentPlayer.switchPlayer();  //Switch player
                 gameBoard.updateCurrentPlayerLabel();  
             }
+            currentPlayer.switchPlayer(); //Switches Player
+            gameBoard.updateCurrentPlayerLabel();
         }
     }
 

@@ -10,7 +10,7 @@ public class GomokuGame {
     public GomokuGame(GomokuBoard boardFrame) {
     	currentPlayer = player1; //Starting w/ player1
     	this.boardFrame = boardFrame;
-    	boardFrame.updateCurrentPlayerLabel(getCurrentPlayerName(), currentPlayer.getCurrentPlayer());
+    	boardFrame.updateCurrentPlayerLabel();
     }
     
     //Handles players' turns and checks if the game is over
@@ -36,7 +36,7 @@ public class GomokuGame {
     	currentPlayer = (currentPlayer == player1) ? player2 : player1;
     	String playerName = (currentPlayer == player1) ? "Player 1" : "Player 2";
     	char playerSymbol = currentPlayer.getCurrentPlayer();
-    	boardFrame.updateCurrentPlayerLabel(playerName, playerSymbol);
+    	boardFrame.updateCurrentPlayerLabel();
     }
     
     //Get current player's name
