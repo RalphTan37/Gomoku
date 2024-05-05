@@ -6,54 +6,49 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class GomokuButton extends JButton implements ActionListener {
-    private int row;
+    //Instance Variables
+	private int row;
     private int col;
     private char[][] board;
     private JButton[][] buttons;
     private GomokuPlayer currentPlayer;
     private GomokuBoard gameBoard;
+
     //Gomoku Button Constructor
-    private GomokuBoard gameBoard;  
-    //Update constructor to include gameboard
     public GomokuButton(int row, int col, char[][] board, JButton[][] buttons, GomokuPlayer currentPlayer, GomokuBoard gameBoard) {
         this.row = row;
         this.col = col;
         this.board = board;
         this.buttons = buttons;
         this.currentPlayer = currentPlayer;
-
         this.gameBoard = gameBoard;
-
-        this.gameBoard = gameBoard; 
-
         this.setPreferredSize(new Dimension(50, 50));
         this.addActionListener(this);
     }
 
+    //Event Handler for Button Clicks
     @Override
     public void actionPerformed(ActionEvent e) {
         if (board[row][col] == '-') {
-            char stone = currentPlayer.getCurrentPlayer(); 
+        	char stone = currentPlayer.getCurrentPlayer();
             board[row][col] = stone;
             this.setText(String.valueOf(stone));
             if (checkFiveInARow(stone)) {
                 String playerName = (stone == 'O') ? "Player 1" : "Player 2";
-                JOptionPane.showMessageDialog(null, "Congrats, " + playerName + " won!");
-                Timer timer = new Timer(2000, (event) -> {
-                    System.exit(0);
-                });
-                timer.setRepeats(false);
-                timer.start();
-            } else {
-                currentPlayer.switchPlayer();  //Switch player
-                gameBoard.updateCurrentPlayerLabel();  
+            	JOptionPane.showMessageDialog(null, "Congrats, " + playerName + " won!");
+            	//In 2 seconds, the program closes
+            	Timer timer = new Timer(2000, (event) ->{
+            		System.exit(0);
+            	});
+            	timer.setRepeats(false);
+            	timer.start();
             }
             currentPlayer.switchPlayer(); //Switches Player
             gameBoard.updateCurrentPlayerLabel();
         }
     }
 
-    // Checking condition
+    //Checks the Winning Condition - Five in a Row!
     private boolean checkFiveInARow(char stone) {
         return checkDirection(1, 0, stone) ||  
                checkDirection(0, 1, stone) ||  
@@ -61,9 +56,9 @@ public class GomokuButton extends JButton implements ActionListener {
                checkDirection(1, -1, stone);   
     }
 
-    // Check for 5 consecutive stones
+    //Checks for 5 consecutive stones in a row & direction
     private boolean checkDirection(int rowStep, int colStep, char stone) {
-     
+        //Variables
     	int count = 1;  
         int r = row + rowStep;
         int c = col + colStep;
