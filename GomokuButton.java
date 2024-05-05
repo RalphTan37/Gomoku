@@ -11,26 +11,21 @@ public class GomokuButton extends JButton implements ActionListener {
     private char[][] board;
     private JButton[][] buttons;
     private GomokuPlayer currentPlayer;
-<<<<<<< HEAD
     private GomokuBoard gameBoard;
-
     //Gomoku Button Constructor
-=======
     private GomokuBoard gameBoard;  
-
-
->>>>>>> 21dd64b4d41a7e90ddf2ee978475997ffe67137e
+    //Update constructor to include gameboard
     public GomokuButton(int row, int col, char[][] board, JButton[][] buttons, GomokuPlayer currentPlayer, GomokuBoard gameBoard) {
         this.row = row;
         this.col = col;
         this.board = board;
         this.buttons = buttons;
         this.currentPlayer = currentPlayer;
-<<<<<<< HEAD
+
         this.gameBoard = gameBoard;
-=======
+
         this.gameBoard = gameBoard; 
->>>>>>> 21dd64b4d41a7e90ddf2ee978475997ffe67137e
+
         this.setPreferredSize(new Dimension(50, 50));
         this.addActionListener(this);
     }
@@ -38,7 +33,7 @@ public class GomokuButton extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (board[row][col] == '-') {
-            char stone = currentPlayer.getCurrentPlayer();
+            char stone = currentPlayer.getCurrentPlayer(); 
             board[row][col] = stone;
             this.setText(String.valueOf(stone));
             if (checkFiveInARow(stone)) {
@@ -50,18 +45,15 @@ public class GomokuButton extends JButton implements ActionListener {
                 timer.setRepeats(false);
                 timer.start();
             } else {
-                currentPlayer.switchPlayer();  
+                currentPlayer.switchPlayer();  //Switch player
                 gameBoard.updateCurrentPlayerLabel();  
             }
-<<<<<<< HEAD
             currentPlayer.switchPlayer(); //Switches Player
             gameBoard.updateCurrentPlayerLabel();
-=======
->>>>>>> 21dd64b4d41a7e90ddf2ee978475997ffe67137e
         }
     }
 
-    
+    // Checking condition
     private boolean checkFiveInARow(char stone) {
         return checkDirection(1, 0, stone) ||  
                checkDirection(0, 1, stone) ||  
@@ -69,7 +61,7 @@ public class GomokuButton extends JButton implements ActionListener {
                checkDirection(1, -1, stone);   
     }
 
-    
+    // Check for 5 consecutive stones
     private boolean checkDirection(int rowStep, int colStep, char stone) {
      
     	int count = 1;  
